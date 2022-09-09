@@ -4,54 +4,59 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:weightSum="10"
-    >
+    android:weightSum="10">
+
     <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="4"
         android:gravity="center"
-        android:textSize="18dp"
-        android:textStyle="normal"
-        android:textColor="@color/black"
-        android:id="@+id/txtDate"
         android:text="Chủ nhật"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"></TextView>
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="normal"></TextView>
+
     <ImageView
-        android:layout_weight="3"
-        android:src="@drawable/ic_launcher_background"
         android:id="@+id/imgWeather"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"></ImageView>
-    <LinearLayout
+        android:layout_marginRight="20dp"
         android:layout_weight="3"
-        android:orientation="horizontal"
+        android:src="@drawable/ic_launcher_background"></ImageView>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
         <TextView
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:gravity="center"
             android:id="@+id/txtMinTemp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="27 độ"></TextView>
-        <TextView
-            android:textSize="18dp"
-            android:textColor="@color/black"
             android:gravity="center"
-            android:layout_weight="6"
+            android:text="27 độ"
+            android:textColor="@color/black"
+            android:textSize="18dp"></TextView>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text=" - "></TextView>
-        <TextView
-            android:textSize="18dp"
-            android:textColor="@color/black"
+            android:layout_weight="6"
             android:gravity="center"
+            android:text=" - "
+            android:textColor="@color/black"
+            android:textSize="18dp"></TextView>
+
+        <TextView
             android:id="@+id/txtMaxTemp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="27 độ"></TextView>
+            android:gravity="center"
+            android:text="27 độ"
+            android:textColor="@color/black"
+            android:textSize="18dp"></TextView>
     </LinearLayout>
 </LinearLayout>

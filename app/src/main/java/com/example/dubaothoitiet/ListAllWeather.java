@@ -1,15 +1,12 @@
 package com.example.dubaothoitiet;
 
 
-
 public class ListAllWeather {
     private String day;
     private String weather;
     private Float humid;
     private Float maxTemp;
     private Float minTemp;
-    public ListAllWeather() {
-    }
 
     public ListAllWeather(String day, String weather, Float humid, Float maxTemp, Float minTemp) {
         this.day = day;

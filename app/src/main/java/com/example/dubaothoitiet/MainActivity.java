@@ -32,11 +32,12 @@ import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    ListView lsvForecast;
+    ListView listViewForecast;
     WeatherAdapter adapter;
     List<ListAllWeather> list;
     ImageView imgWeatherCurrent;
     TextView txtAddress, txtTemp, txtHumid, txtCloud, txtWind, txtTime, txtDesc;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("E, dd-MM HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         addWeatherCurrent("hanoi");
     }
 
-    private void addForecastWeather(String lat,String lon) {
-        String url = "https://api.openweathermap.org/data/2.5/forecast?lat="+lat+"&lon="+lon+"&appid=ecb7a5561e836a4abe7958ef5779ac07&units=metric";
+    private void addForecastWeather(String lat, String lon) {
+        String url = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=ecb7a5561e836a4abe7958ef5779ac07&units=metric";
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         JsonObjectRequest jsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -58,25 +59,19 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray listWeather = response.getJSONArray("list");
                     for (int i = 0; i < listWeather.length(); i++) {
                         JSONObject weather = listWeather.getJSONObject(i);
-                        JSONObject main=weather.getJSONObject("main");
-                        JSONArray weatherForecast=weather.getJSONArray("weather");
-
-                        String dt=weather.getString("dt");
-
+                        JSONObject main = weather.getJSONObject("main");
+                        JSONArray weatherForecast = weather.getJSONArray("weather");
+                        String dt = weather.getString("dt");
                         long lngay = Long.parseLong(dt);
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("E HH:mm");
                         Date date = new Date(lngay * 1000);
                         String dateCurrent = dateFormat.format(date);
-
-                        Float minTemp= Float.parseFloat(main.getString("temp_min"));
-                        Float maxTemp=Float.parseFloat(main.getString("temp_max"));
-                        Float humidity=Float.parseFloat(main.getString("humidity"));
-
-                        JSONObject detailWeather=weatherForecast.getJSONObject(0);
-                        String icon=detailWeather.getString("icon");
-                        String urlImg = "http://openweathermap.org/img/wn/"+icon+"@2x.png?fbclid=IwAR28YhluTsIrJKXCeIiwB7c7ZCM5z0MBABx8LMmrTWrUhuKnZREfZ9VOHvY";
-                        list.add(new ListAllWeather(dateCurrent,urlImg,humidity,maxTemp,minTemp));
-
+                        Float minTemp = Float.parseFloat(main.getString("temp_min"));
+                        Float maxTemp = Float.parseFloat(main.getString("temp_max"));
+                        Float humidity = Float.parseFloat(main.getString("humidity"));
+                        JSONObject detailWeather = weatherForecast.getJSONObject(0);
+                        String icon = detailWeather.getString("icon");
+                        String urlImg = "http://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR28YhluTsIrJKXCeIiwB7c7ZCM5z0MBABx8LMmrTWrUhuKnZREfZ9VOHvY";
+                        list.add(new ListAllWeather(dateCurrent, urlImg, humidity, maxTemp, minTemp));
                     }
                     adapter.notifyDataSetChanged();
                 } catch (Exception e) {
@@ -94,27 +89,28 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_weather,menu);
-        MenuItem search=menu.findItem(R.id.itSearch);
-        SearchView searchView= (SearchView) MenuItemCompat.getActionView(search);
+        getMenuInflater().inflate(R.menu.menu_weather, menu);
+        MenuItem search = menu.findItem(R.id.itSearch);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        Toast.makeText(MainActivity.this, "Chuyên đổi địa điểm", Toast.LENGTH_SHORT).show();
-        addWeatherCurrent(s);
-        searchView.clearFocus();
-        return false;
-    }
-    @Override
-    public boolean onQueryTextChange(String s) {
-        return false;
-    }
-});
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Toast.makeText(MainActivity.this, "Chuyên đổi địa điểm", Toast.LENGTH_SHORT).show();
+                addWeatherCurrent(s);
+                searchView.clearFocus();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 
     private void addWeatherCurrent(String city) {
-        String url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=ecb7a5561e836a4abe7958ef5779ac07&units=metric";
+        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=ecb7a5561e836a4abe7958ef5779ac07&units=metric";
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         JsonObjectRequest jsonObject = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -127,35 +123,22 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject main = response.getJSONObject("main");
                     JSONObject coord = response.getJSONObject("coord");
                     String name = response.getString("name");
-                    //
-                    String dt = response.getString("dt");
-                    long lngay = Long.parseLong(dt);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("E, dd-MM HH:mm");
+//                    String dt = response.getString("dt");
+                    long lngay = Long.parseLong(response.getString("dt"));
                     Date date = new Date(lngay * 1000);
                     String dateCurrent = dateFormat.format(date);
                     String humid = main.getString("humidity");
                     String temp = main.getString("temp");
-                    String lat=coord.getString("lat");
-                    String lon=coord.getString("lon");
-                    //
+                    String lat = coord.getString("lat");
+                    String lon = coord.getString("lon");
                     String cloudPercent = cloud.getString("all");
                     String wind = windy.getString("speed");
-                    String icon=weatherObj.getString("icon");
-
-
+                    String icon = weatherObj.getString("icon");
                     String urlImg = "https://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR1ys9cXhXXShFB6GyXqXn_DSHunzvQpu0sGoLdhVQJ1RDuLdvmHYIlp9Ns";
                     String desc = weatherObj.getString("description");
 
-                    txtTemp.setText(temp + "°");
-                    txtTime.setText(dateCurrent);
-                    txtAddress.setText(name);
-                    txtHumid.setText(humid + "%");
-                    txtDesc.setText(desc);
-                    txtWind.setText(wind + "m/s");
-                    txtCloud.setText(cloudPercent + "%");
-                    Picasso.get().load(urlImg).into(imgWeatherCurrent);
-
-                    addForecastWeather(lat,lon);
+                    setData(temp, dateCurrent, name, humid, desc, wind, cloudPercent, urlImg);
+                    addForecastWeather(lat, lon);
                 } catch (Exception e) {
                     Log.d("pdt", "onResponse: " + e.toString());
                 }
@@ -170,14 +153,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addData() {
-        String link = "http://openweathermap.org/img/wn/10d@2x.png?fbclid=IwAR0SXP8cXNZfas4ikx_ixWYIOmgg6ldpqMloGoJ6CoElxPPMq7QQCEWqxJ4";
         adapter = new WeatherAdapter(this, R.layout.line_weather, list);
-        lsvForecast.setAdapter(adapter);
+        listViewForecast.setAdapter(adapter);
+    }
 
+    private void setData(String temp, String dateCurrent, String name, String humid, String desc, String wind, String cloudPercent, String urlImg) {
+        txtTemp.setText(temp + "°");
+        txtTime.setText(dateCurrent);
+        txtAddress.setText(name);
+        txtHumid.setText(humid + "%");
+        txtDesc.setText(desc);
+        txtWind.setText(wind + "m/s");
+        txtCloud.setText(cloudPercent + "%");
+        Picasso.get().load(urlImg).into(imgWeatherCurrent);
     }
 
     private void mapping() {
-        lsvForecast = findViewById(R.id.lsvForecast);
+        listViewForecast = findViewById(R.id.lsvForecast);
         txtAddress = findViewById(R.id.txtAddress);
         txtTemp = findViewById(R.id.txtTemp);
         txtHumid = findViewById(R.id.txtHumid);
@@ -186,7 +178,6 @@ public class MainActivity extends AppCompatActivity {
         txtTime = findViewById(R.id.txtTime);
         txtDesc = findViewById(R.id.txtDesc);
         imgWeatherCurrent = findViewById(R.id.imgWeatherCurrent);
-
         list = new ArrayList<>();
     }
 

@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/Androidclass/AppWeatherDemo/app/src/main/res/drawable/ic_baseline_device_thermostat_24.xml" value="0.1665" />
         <entry key="..\:/Androidclass/AppWeatherDemo/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1665" />
-        <entry key="..\:/Androidclass/AppWeatherDemo/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Androidclass/AppWeatherDemo/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Androidclass/AppWeatherDemo/app/src/main/res/layout/line_weather.xml" value="0.2" />
         <entry key="..\:/Androidclass/DuBaoThoiTiet/app/src/main/res/drawable/ic_baseline_device_thermostat_24.xml" value="0.1665" />
         <entry key="..\:/Androidclass/DuBaoThoiTiet/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1665" />
         <entry key="..\:/Androidclass/DuBaoThoiTiet/app/src/main/res/layout/activity_main.xml" value="0.22" />

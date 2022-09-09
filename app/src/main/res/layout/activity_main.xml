@@ -4,148 +4,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/img"
+    android:orientation="vertical"
     android:scaleType="center"
     tools:context="com.example.dubaothoitiet.MainActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        >
+        android:orientation="vertical"
+        android:padding="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_marginTop="5dp"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_location_on_24">
-                </ImageView>
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_baseline_location_on_24"></ImageView>
+
                 <TextView
-                    android:textColor="@color/black"
                     android:id="@+id/txtAddress"
-                    android:textStyle="bold"
-                    android:textSize="25sp"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Địa chỉ"></TextView>
+                    android:layout_marginLeft="10dp"
+                    android:text="Địa chỉ"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold"></TextView>
             </LinearLayout>
+
             <TextView
-                android:textColor="@color/black"
                 android:id="@+id/txtTime"
-                android:layout_marginTop="5dp"
-                android:textSize="15sp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày/Tháng/Năm"></TextView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Ngày/Tháng/Năm"
+                android:textColor="@color/black"
+                android:textSize="15sp"></TextView>
         </LinearLayout>
+
         <LinearLayout
-            android:gravity="center"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/imgWeatherCurrent"
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-               ></ImageView>
+                android:layout_height="100dp"></ImageView>
+
             <LinearLayout
-                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="@color/black"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/txtTemp"
-                    android:layout_gravity="center"
+                android:padding="5dp">
 
-                    android:textSize="40sp"
+                <TextView
+                    android:id="@+id/txtTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20 độ"></TextView>
-                <TextView
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="20 độ"
                     android:textColor="@color/black"
+                    android:textSize="40sp"></TextView>
+
+                <TextView
                     android:id="@+id/txtDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mô tả"></TextView>
+                    android:text="Mô tả"
+                    android:textColor="@color/black"></TextView>
             </LinearLayout>
 
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_marginTop="50dp"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="vertical"
             android:weightSum="3">
+
             <LinearLayout
-                android:gravity="center|left"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_baseline_device_thermostat_24"></ImageView>
+
                 <TextView
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Độ ẩm"></TextView>
-                <TextView
+                    android:text="Độ ẩm"
                     android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
                     android:id="@+id/txtHumid"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="69%"></TextView>
+                    android:layout_marginLeft="10dp"
+                    android:text="69%"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"></TextView>
             </LinearLayout>
+
             <LinearLayout
-                android:gravity="center|left"
-                android:layout_weight="1"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/cloud"></ImageView>
+
                 <TextView
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mây"></TextView>
-                <TextView
+                    android:text="Mây"
                     android:textColor="@color/black"
+                    android:textSize="16sp"></TextView>
+
+                <TextView
                     android:id="@+id/txtCloud"
-                    android:textSize="14sp"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="69%"></TextView>
+                    android:layout_marginLeft="10dp"
+                    android:text="69%"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -179,26 +194,31 @@
                     android:textSize="16sp"></TextView>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
 
-            ><TextView
-            android:textColor="@color/black"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thời tiết 5 ngày tới"></TextView>
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:text="Thời tiết 5 ngày tới"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"></TextView>
+
             <ListView
-                android:background="@color/white"
-                android:layout_marginTop="10dp"
                 android:id="@+id/lsvForecast"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView></LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"></ListView>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
