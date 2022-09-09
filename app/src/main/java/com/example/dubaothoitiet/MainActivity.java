@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -58,20 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray listWeather = response.getJSONArray("list");
                     for (int i = 0; i < listWeather.length(); i++) {
-                        JSONObject weather = listWeather.getJSONObject(i);
-                        JSONObject main = weather.getJSONObject("main");
-                        JSONArray weatherForecast = weather.getJSONArray("weather");
-                        String dt = weather.getString("dt");
-                        long lngay = Long.parseLong(dt);
-                        Date date = new Date(lngay * 1000);
-                        String dateCurrent = dateFormat.format(date);
-                        Float minTemp = Float.parseFloat(main.getString("temp_min"));
-                        Float maxTemp = Float.parseFloat(main.getString("temp_max"));
-                        Float humidity = Float.parseFloat(main.getString("humidity"));
-                        JSONObject detailWeather = weatherForecast.getJSONObject(0);
-                        String icon = detailWeather.getString("icon");
-                        String urlImg = "http://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR28YhluTsIrJKXCeIiwB7c7ZCM5z0MBABx8LMmrTWrUhuKnZREfZ9VOHvY";
-                        list.add(new ListAllWeather(dateCurrent, urlImg, humidity, maxTemp, minTemp));
+                        putDataForecastWeather(listWeather,response,i);
                     }
                     adapter.notifyDataSetChanged();
                 } catch (Exception e) {
@@ -116,27 +104,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONArray weatherArray = response.getJSONArray("weather");
-                    JSONObject weatherObj = weatherArray.getJSONObject(0);
-                    JSONObject windy = response.getJSONObject("wind");
-                    JSONObject cloud = response.getJSONObject("clouds");
-                    JSONObject main = response.getJSONObject("main");
-                    JSONObject coord = response.getJSONObject("coord");
-                    String name = response.getString("name");
-                    long lngay = Long.parseLong(response.getString("dt"));
-                    Date date = new Date(lngay * 1000);
-                    String dateCurrent = dateFormat.format(date);
-                    String humid = main.getString("humidity");
-                    String temp = main.getString("temp");
-                    String lat = coord.getString("lat");
-                    String lon = coord.getString("lon");
-                    String cloudPercent = cloud.getString("all");
-                    String wind = windy.getString("speed");
-                    String icon = weatherObj.getString("icon");
-                    String urlImg = "https://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR1ys9cXhXXShFB6GyXqXn_DSHunzvQpu0sGoLdhVQJ1RDuLdvmHYIlp9Ns";
-                    String desc = weatherObj.getString("description");
-                    setData(temp, dateCurrent, name, humid, desc, wind, cloudPercent, urlImg);
-                    addForecastWeather(lat, lon);
+                    putDataWeatherCurrent(response);
                 } catch (Exception e) {
                     Log.d("pdt", "onResponse: " + e.toString());
                 }
@@ -179,4 +147,44 @@ public class MainActivity extends AppCompatActivity {
         list = new ArrayList<>();
     }
 
+    private void putDataWeatherCurrent (JSONObject response) throws JSONException {
+        JSONArray weatherArray = response.getJSONArray("weather");
+        JSONObject weatherObj = weatherArray.getJSONObject(0);
+        JSONObject windy = response.getJSONObject("wind");
+        JSONObject cloud = response.getJSONObject("clouds");
+        JSONObject main = response.getJSONObject("main");
+        JSONObject coord = response.getJSONObject("coord");
+        String name = response.getString("name");
+        long lngay = Long.parseLong(response.getString("dt"));
+        Date date = new Date(lngay * 1000);
+        String dateCurrent = dateFormat.format(date);
+        String humid = main.getString("humidity");
+        String temp = main.getString("temp");
+        String lat = coord.getString("lat");
+        String lon = coord.getString("lon");
+        String cloudPercent = cloud.getString("all");
+        String wind = windy.getString("speed");
+        String icon = weatherObj.getString("icon");
+        String urlImg = "https://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR1ys9cXhXXShFB6GyXqXn_DSHunzvQpu0sGoLdhVQJ1RDuLdvmHYIlp9Ns";
+        String desc = weatherObj.getString("description");
+        setData(temp, dateCurrent, name, humid, desc, wind, cloudPercent, urlImg);
+        addForecastWeather(lat, lon);
+    }
+
+    private void putDataForecastWeather (JSONArray listWeather,JSONObject respone,int i) throws JSONException{
+        JSONObject weather = listWeather.getJSONObject(i);
+        JSONObject main = weather.getJSONObject("main");
+        JSONArray weatherForecast = weather.getJSONArray("weather");
+        String dt = weather.getString("dt");
+        long lngay = Long.parseLong(dt);
+        Date date = new Date(lngay * 1000);
+        String dateCurrent = dateFormat.format(date);
+        Float minTemp = Float.parseFloat(main.getString("temp_min"));
+        Float maxTemp = Float.parseFloat(main.getString("temp_max"));
+        Float humidity = Float.parseFloat(main.getString("humidity"));
+        JSONObject detailWeather = weatherForecast.getJSONObject(0);
+        String icon = detailWeather.getString("icon");
+        String urlImg = "http://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR28YhluTsIrJKXCeIiwB7c7ZCM5z0MBABx8LMmrTWrUhuKnZREfZ9VOHvY";
+        list.add(new ListAllWeather(dateCurrent, urlImg, humidity, maxTemp, minTemp));
+    }
 }
