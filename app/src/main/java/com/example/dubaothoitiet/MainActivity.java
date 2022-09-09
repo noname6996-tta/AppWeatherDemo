@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject main = response.getJSONObject("main");
                     JSONObject coord = response.getJSONObject("coord");
                     String name = response.getString("name");
-//                    String dt = response.getString("dt");
                     long lngay = Long.parseLong(response.getString("dt"));
                     Date date = new Date(lngay * 1000);
                     String dateCurrent = dateFormat.format(date);
@@ -136,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                     String icon = weatherObj.getString("icon");
                     String urlImg = "https://openweathermap.org/img/wn/" + icon + "@2x.png?fbclid=IwAR1ys9cXhXXShFB6GyXqXn_DSHunzvQpu0sGoLdhVQJ1RDuLdvmHYIlp9Ns";
                     String desc = weatherObj.getString("description");
-
                     setData(temp, dateCurrent, name, humid, desc, wind, cloudPercent, urlImg);
                     addForecastWeather(lat, lon);
                 } catch (Exception e) {
